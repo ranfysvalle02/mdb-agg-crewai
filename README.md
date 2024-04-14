@@ -32,6 +32,28 @@ In SQL, this would require multiple subqueries, temporary tables, and joins - a 
 * **Benchmarking:** Comparing your portfolio's ROI to relevant market indices helps gauge how your investments are performing relative to the overall market.
 * **Tax Implications:** In many jurisdictions, calculating the ROI of investments plays a role in determining capital gains or losses, impacting tax calculations.
 
+## The Solution: MongoDB's Aggregation Framework
+
+![](https://miro.medium.com/v2/resize:fit:665/1*5ZlDfUiM_uHPW6KwvszS_g.png)
+
+The MongoDB Aggregation Framework provides a powerful data processing pipeline where documents are transformed to produce aggregated results. By executing complex calculations and data manipulations directly on the server-side, it significantly reduces the volume of data that needs to be transferred across the network. This optimization is crucial when working with Large Language Models (LLMs) - specially those that are hosted remotely like OpenAI.
+
+LLMs excel at understanding and generating human-like text, but they can be constrained by the size of their context window (the amount of input text they can process at once). Pre-processing and aggregating data with MongoDB's Aggregation Framework effectively shrinks the dataset that needs to be fed to the LLM. 
+
+By moving the math and the data aggregation to MongoDB, you can leverage the LLM's language capabilities for high-value tasks like:
+
+* **Generating insightful summaries and interpretations:** Summarizing pre-aggregated trends identified by MongoDB.
+* **Crafting compelling narratives:**  Turning  data points into engaging business reports. 
+* **Answering complex questions about the data:**  The LLM can combine its understanding of the processed data with external knowledge to provide richer answers.
+
+## Supercharge Investment Analysis with MongoDB and CrewAI
+
+![](https://cosanostra-2024-vsyfm.mongodbstitch.com/crewai.png)
+
+The financial world is fueled by data analysis. The faster you can extract meaningful insights from raw data, the better your investment decisions will be. CrewAI, combined with the power of MongoDB Atlas, provides a unique automation approach that goes beyond basic number-crunching to deliver truly actionable analysis.
+
+For this example, The Investment Researcher Agent: This CrewAI agent is our expert, skilled in finding valuable data using tools like search engines. It's designed to hunt down financial trends, company news, and analyst insights.
+
 **Usage:**
 
 1. **Prerequisites**
