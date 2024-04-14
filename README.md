@@ -36,8 +36,8 @@ In SQL, this would require multiple subqueries, temporary tables, and joins - a 
 
 1. **Prerequisites**
    - MongoDB Atlas Cluster with the sample_analytics dataset loaded
-   - SERPER API Key (for accessing news and market data via CrewAI) [https://serper.dev/](https://serper.dev/).
-   - LLM Resource (CrewAI supports various options; instructions for these can be found at [https://docs.crewai.com/how-to/LLM-Connections/](https://docs.crewai.com/how-to/LLM-Connections/)) 
+   - SERPER API Key (for accessing news and market data via CrewAI) [https://serper.dev/](https://serper.dev/)
+   - LLM Resource (CrewAI supports various options; [https://docs.crewai.com/how-to/LLM-Connections/](https://docs.crewai.com/how-to/LLM-Connections/)) 
 
 2. **Installation**
    ```bash
