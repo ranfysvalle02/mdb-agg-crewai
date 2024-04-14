@@ -44,12 +44,7 @@ In SQL, this would require multiple subqueries, temporary tables, and joins - a 
    pip install pymongo crewai crewai-tools langchain_openai
    ```
 
-3. **Configuration**
-      - MongoDB Atlas connection string
-      - Serper API Key
-      - LLM connection details (if using CrewAI)
-
-4. **Run the Script**
+3. **Run the Script**
    ```bash
    python investment_analysis.py
    ```
