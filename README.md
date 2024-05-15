@@ -451,7 +451,7 @@ While the combination of MongoDB's Aggregation Framework and GenAI represents a 
 
 2. **Uncertainty in Predictions:** Despite the sophistication of the analysis, there will always be an inherent degree of uncertainty in investment predictions. Future outcomes are inherently unknowable, and factors beyond the scope of historical data can influence results.
 
-3. **LLM Limitations:** LLMs are still evolving, and their ability to interpret and analyze financial data is continually improving. However, biases in training data or limitations in the model's architecture could lead to inaccurate or misleading insights.
+3. **LLM Limitations:** LLMs are still evolving, and their ability to research, interpret and analyze data is continually improving. However, biases in training data or limitations in the model's architecture could lead to inaccurate or misleading insights.
 
 By being aware of these limitations and taking steps to mitigate them, you can ensure a more responsible and well-rounded approach to investment analysis.
 
