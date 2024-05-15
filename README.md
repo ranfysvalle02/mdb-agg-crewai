@@ -10,9 +10,9 @@ While Large Language Models (LLMs) excel at language, they lack the ability to u
 
 That's where MongoDB's Aggregation Framework shines, offering an efficient and powerful solution for complex data analysis tasks. It allows you to process entire collections of data, passing it through a multi-stage data pipeline. Within these stages, you can perform calculations and transformations on entire collections. This bypasses the limitations of LLMs for numerical computations, providing a robust and reliable method for data analysis.
 
-In this blog post, we’ll combine the power of the MongoDB Aggregation framework with GenAI to overcome the limitations of “Classic RAG”. We'll explore this by delving into the MongoDB Atlas Sample Dataset, specifically the `sample_analytics` database. We will concentrate on the 'transactions' collection as it provides a realistic and comprehensive dataset. The transaction data offers a realistic dataset that allows users to hone their skills in data analysis, querying, and aggregation, particularly in the context of financial data.
+In this blog post, we’ll combine the power of the MongoDB Aggregation framework with GenAI to overcome the limitations of “Classic RAG”. We'll explore this by delving into the MongoDB Atlas Sample Dataset, specifically the `sample_analytics` database. The transaction data offers a realistic dataset that allows users to hone their skills in data analysis, querying, and aggregation, particularly in the context of financial data.
 
-## Explanation of the `sample_analytics` documents
+### Explanation of the `sample_analytics` documents
 Collection: transactions
 
 - transaction_id: This is a unique identifier that distinctly marks each transaction.
@@ -31,7 +31,7 @@ Stock transaction data offers a wealth of information for investment researchers
 * **Uncover Hidden Opportunities:** Discover undervalued stocks or sectors poised for growth.
 * **Manage Risk:** Assess the volatility of specific holdings and make informed decisions about asset allocation for optimal risk-return balance.
 
-## The Task: Investment Performance Analysis
+### The Task: Investment Performance Analysis
 
 Consider a scenario where we need to determine the return on investment (ROI) for each stock over a certain period. This task involves filtering the sales by product, calculating the ROI, and then sorting these to find the stocks with the highest returns. Traditional methods like SQL or application code processing can be complex and inefficient, especially with large datasets.
 
@@ -47,7 +47,7 @@ Navigating these complexities can be made more efficient by harnessing the power
 * **Benchmarking:** Comparing your portfolio's ROI to relevant market indices helps gauge how your investments are performing relative to the overall market.
 * **Tax Implications:** In many jurisdictions, calculating the ROI of investments plays a role in determining capital gains or losses, impacting tax calculations.
 
-## The Solution: MongoDB's Aggregation Framework
+### The Solution: MongoDB's Aggregation Framework
 
 ![MongoDB Aggregation Pipeline Visualization](https://raw.githubusercontent.com/ranfysvalle02/blog-drafts/main/xa1.png)
 
@@ -196,7 +196,7 @@ The result will be a list of documents, each representing a unique stock, and co
 
 This approach leverages MongoDB's Aggregation Framework to perform complex data analysis tasks efficiently, directly within the database, without requiring extensive data transfer or additional processing in the application code.
 
-## Analysis
+### Analysis
 
 The data presented above provides a snapshot of the return on investment (ROI) for various tech stocks.
 
@@ -211,6 +211,17 @@ The aggregation framework lays the groundwork, but we can take our analysis a st
 * **Summarize Trends:**  Get concise summaries of complex data patterns calculated by MongoDB.
 * **Link to External News:** Connect market trends with real-time news on companies you're invested in.
 * **Answer Complex Questions:** Ask questions about the dataset and get responses that combine the data with insights from the wider financial world.
+
+### Supercharge Investment Analysis with MongoDB and CrewAI
+
+![CrewAI Visualization](https://raw.githubusercontent.com/ranfysvalle02/blog-drafts/main/HighLevelChart_noBG.jpg)
+
+(_image from  [LangChain Blog | CrewAI: The Future of AI Agent Teams](https://blog.langchain.dev/crewai-unleashed-future-of-ai-agent-teams/))_
+
+
+The financial world is fueled by data analysis. The faster you can extract meaningful insights from raw data, the better your investment decisions will be. CrewAI, combined with the power of MongoDB Atlas, provides a unique automation approach that goes beyond basic number-crunching to deliver truly actionable analysis.
+
+For this example, we will create an Investment Researcher Agent. This agent is our expert, skilled in finding valuable data using tools like search engines. It's designed to hunt down financial trends, company news, and analyst insights.
 
 **Unlocking the Power of AI Collaboration: Agents, Tasks, and Tools**
 
@@ -232,23 +243,16 @@ In essence, CrewAI's powerful combination of agents, tasks, and tools empowers y
 
 To follow along, you'll need:
 
-1. **MongoDB Atlas Cluster:** Create your free cluster and [load the Sample Dataset](https://www.mongodb.com/basics/sample-database).
+1. **MongoDB Atlas Cluster:** Create your free cluster and [load the Sample Dataset](https://www.mongodb.com/basics/sample-database). The transaction data in the sample analytics dataset offers a realistic dataset that allows users to hone their skills in data analysis, querying, and aggregation, particularly in the context of financial data.
 
 2. **SERPER_API_KEY:** Sign up for a free account at [https://serper.dev](https://serper.dev/). Serper is a Google Search API that will grant our CrewAI setup access to real-time market data and news, enriching our analysis beyond just database calculations.
 
 3. **LLM Resource:** CrewAI supports various LLM connections, including local models (Ollama), APIs like Azure, and all LangChain LLM components for customizable AI solutions. [Click here to learn more about CrewAI LLM Support](https://docs.crewai.com/how-to/LLM-Connections/)
 
-## Supercharge Investment Analysis with MongoDB and CrewAI
 
-![CrewAI Visualization](https://raw.githubusercontent.com/ranfysvalle02/blog-drafts/main/HighLevelChart_noBG.jpg)
+_**note**: Python version used during development was: 3.10.10_
 
-(_image from  [LangChain Blog | CrewAI: The Future of AI Agent Teams](https://blog.langchain.dev/crewai-unleashed-future-of-ai-agent-teams/))_
-
-
-The financial world is fueled by data analysis. The faster you can extract meaningful insights from raw data, the better your investment decisions will be. CrewAI, combined with the power of MongoDB Atlas, provides a unique automation approach that goes beyond basic number-crunching to deliver truly actionable analysis.
-
-For this example, we will create an Investment Researcher Agent. This agent is our expert, skilled in finding valuable data using tools like search engines. It's designed to hunt down financial trends, company news, and analyst insights.
-## The Code
+### The Code
 
 In this section, we'll walk through the Python code used to perform financial analysis based on transaction data stored in MongoDB, using Azure OpenAI and Google Search API for data analysis and insights.
 
@@ -268,7 +272,7 @@ collection = db["transactions"]
 
 ### Azure OpenAI Setup
 
-Next, we set up our connection to Azure OpenAI. Azure OpenAI is used to generate language models that can help us analyze and summarize our data.
+Next, we set up our connection to Azure OpenAI. Azure OpenAI can be replaced by your preferred LLM.
 
 ```python
 from langchain_openai import AzureChatOpenAI
@@ -399,7 +403,7 @@ Finally, we kick off our task execution. The researcher agent will use the data 
 tech_crew.kickoff(inputs={'agg_data': str(results)})
 ```
 
-## Example OUTPUT
+### Example OUTPUT
 
 ```
 Thought: I now know the final answer
@@ -439,11 +443,23 @@ Based on current news and events:
 It is also suggested to keep a close eye on those stocks that are currently showing negative returns. Understanding the reasons behind their poor performance could provide investment opportunities if these issues are addressed and the businesses start to turn around.
 ```
 
-## Conclusion
+### Limitations and Considerations
+
+While the combination of MongoDB's Aggregation Framework and GenAI represents a powerful tool for data analysis and interpretation, it's important to recognize a few potential limitations:
+
+1. **Dependence on Historical Data:** Past performance may not always predict future results, especially in unpredictable markets where unforeseen events can significantly impact investment outcomes.
+
+2. **Uncertainty in Predictions:** Despite the sophistication of the analysis, there will always be an inherent degree of uncertainty in investment predictions. Future outcomes are inherently unknowable, and factors beyond the scope of historical data can influence results.
+
+3. **LLM Limitations:** LLMs are still evolving, and their ability to interpret and analyze financial data is continually improving. However, biases in training data or limitations in the model's architecture could lead to inaccurate or misleading insights.
+
+By being aware of these limitations and taking steps to mitigate them, you can ensure a more responsible and well-rounded approach to investment analysis.
+
+### Conclusion
 
 In this blog post, we explored how MongoDB's Aggregation Framework, Large Language Models (LLMs), and CrewAI can be leveraged to transform investment analysis. The key to unlocking smarter investment decisions lies in harnessing the power of your transaction data. MongoDB's Aggregation Framework provides the tools to efficiently calculate essential metrics like ROI, trends, and volatility. When combined with AI's ability to interpret these findings, you gain a deeper understanding of the market. This empowers you to identify hidden opportunities, make informed decisions, and automate routine analysis, ultimately boosting your investment success.
 
-## The Future: AI-Powered Investment Analysis
+### The Future: AI-Powered Investment Analysis
 
 The future of investment analysis belongs to those who embrace the power of data and AI. By combining MongoDB's robust data handling with the insight-generating capabilities of AI tools like CrewAI, you gain the tools to:
 
@@ -453,4 +469,8 @@ The future of investment analysis belongs to those who embrace the power of data
 * **Automate tedious analysis**, giving you more time for strategic thinking.
 
 Don't just analyze the market – shape it. Start harnessing the potential of MongoDB and AI today, and transform your investment decision-making process.
+
+The source code is available at [GitHub - mdb-agg-crewai](https://github.com/ranfysvalle02/mdb-agg-crewai/blob/main/investment_analysis.py)
+
+
 
