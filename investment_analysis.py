@@ -306,7 +306,7 @@ In essence, CrewAI's powerful combination of agents, tasks, and tools empowers y
 
 To follow along, you'll need:
 
-1. **MongoDB Atlas Cluster:** Create your free cluster and [load the Sample Dataset](https://www.mongodb.com/basics/sample-database). The transaction data in the sample analytics dataset offers a realistic dataset that allows users to hone their skills in data analysis, querying, and aggregation, particularly in the context of financial data.
+1. **MongoDB Atlas Cluster:** [Create your free cluster](https://www.mongodb.com/docs/guides/atlas/cluster/) and [load the Sample Dataset](https://www.mongodb.com/basics/sample-database). The transaction data in the sample analytics dataset offers a realistic dataset that allows users to hone their skills in data analysis, querying, and aggregation, particularly in the context of financial data.
 
 2. **SERPER_API_KEY:** Sign up for a free account at [https://serper.dev](https://serper.dev/). Serper is a Google Search API that will grant our CrewAI setup access to real-time market data and news, enriching our analysis beyond just database calculations.
 
@@ -321,6 +321,7 @@ In this section, we'll walk through the Python code used to perform financial an
 
 First, we set up a connection to MongoDB using pymongo. This is where our transaction data is stored. We'll be performing an aggregation on this data later.
 
+#### **file: investment_analysis.py**
 ```python
 import os
 import pymongo
@@ -335,6 +336,8 @@ collection = db["transactions"]
 
 Next, we set up our connection to Azure OpenAI. Azure OpenAI can be replaced by your preferred LLM.
 
+
+#### **file: investment_analysis.py**
 ```python
 from langchain_openai import AzureChatOpenAI
 
@@ -353,6 +356,7 @@ default_llm = AzureChatOpenAI(
 
 We're also going to use the Google Search API. This will be used by our "researcher" agent to find relevant financial data and news articles.
 
+#### **file: investment_analysis.py**
 ```python
 from langchain_community.utilities import GoogleSerperAPIWrapper
 from langchain.agents import Tool
@@ -369,6 +373,7 @@ search_tool = Tool(
 
 We'll be using CrewAI to manage our agents and tasks. In this case, we have one agent - a researcher who is tasked with analyzing the data and providing actionable insights.
 
+#### **file: investment_analysis.py**
 ```python
 from crewai import Crew, Process, Task, Agent
 
@@ -416,6 +421,7 @@ tech_crew = Crew(
 
 Next, we define our MongoDB aggregation pipeline. This pipeline is used to process our transaction data and calculate the return on investment for each stock symbol.
 
+#### **file: investment_analysis.py**
 ```python
 pipeline = [
   {"$unwind": "$transactions"},
@@ -460,6 +466,7 @@ print(results)
 
 Finally, we kick off our task execution. The researcher agent will use the data from our MongoDB aggregation, as well as any other tools at their disposal, to analyze the data and provide insights.
 
+#### **file: investment_analysis.py**
 ```python
 tech_crew.kickoff(inputs={'agg_data': str(results)})
 ```
