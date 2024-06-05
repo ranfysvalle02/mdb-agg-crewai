@@ -184,7 +184,7 @@ DuckDuckGo was chosen for this example because it:
 
 - **Requires NO API KEY**
 - Easy to use
-- Provides `snippets` I can use to get a general sense of the content
+- Provides `snippets` 
 
 ![DuckDuckGo Search Tool](https://raw.githubusercontent.com/ranfysvalle02/blog-drafts/main/x219.png)
 
