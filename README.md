@@ -23,9 +23,6 @@ To follow along, you'll need:
 
 **note:** _The source code in the example uses Azure OpenAI. To follow along, you’ll need a valid [Azure OpenAI deployment](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/create-resource?pivots=web-portal)_
 
-**Required Python Packages**
-- `pip install pymongo crewai`
-
 ### `sample_analytics.transactions`
 
 The [sample_analytics database](https://www.mongodb.com/docs/atlas/sample-data/sample-analytics/) contains three collections (customers, accounts, transactions) for a typical financial services application. The transactions collection contains transaction details for users. Each document contains an account id, a count of how many transactions are in this set, the start and end dates for transactions covered by this document, and a list of sub documents. Each sub document represents a single transaction and the related information for that transaction.
