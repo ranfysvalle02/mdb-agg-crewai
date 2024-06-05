@@ -98,6 +98,21 @@ In essence, CrewAI's powerful combination of agents, tasks, and tools empowers y
 
 In this section, we'll walk through the Python code used to perform financial analysis based on transaction data stored in MongoDB, using GenAI for data analysis and insights. The Python version used during development was: `3.10.10`
 
+Here are the required packages to run the code. Make sure they are installed properly before continuing.
+
+#### **file:requirements.txt**
+```
+pymongo==4.7.2
+crewai==0.22.5
+langchain==0.2.1
+langchain-community==0.2.1
+langchain-openai==0.0.5
+duckduckgo-search==6.1.5
+```
+
+You can install all the packages at once by running `pip install -r requirements.txt`
+
+
 ### MongoDB Setup
 
 First, we set up a connection to MongoDB using [pymongo](https://pymongo.readthedocs.io/en/stable/). This is where our transaction data is stored. We'll be performing an aggregation on this data later.
