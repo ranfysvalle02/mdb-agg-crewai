@@ -190,10 +190,6 @@ DuckDuckGo was chosen for this example because it:
 
 ### CrewAI Setup
 
-We'll be using CrewAI to manage our agents and tasks. In this case, we have one agent - a researcher who is tasked with analyzing the data and providing actionable insights.
-
-### CrewAI Setup
-
 We'll be using CrewAI to manage our agents and tasks. In this case, we have one agent - a researcher who is tasked with analyzing the data and providing actionable insights. ​​In CrewAI, tasks are the individual steps that make up a larger workflow.
 
 **Agents & Tasks: Working Together as a Crew**
