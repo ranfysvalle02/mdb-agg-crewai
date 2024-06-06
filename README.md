@@ -152,10 +152,10 @@ AZURE_OPENAI_ENDPOINT = "https://__DEMO__.openai.azure.com"
 AZURE_OPENAI_API_KEY = "__AZURE_OPENAI_API_KEY__"
 deployment_name = "gpt-4-32k"  # The name of your model deployment
 default_llm = AzureChatOpenAI(
-    openai_api_version=os.environ.get("AZURE_OPENAI_VERSION", "2023-07-01-preview"),
-    azure_deployment=deployment_name,
-    azure_endpoint=AZURE_OPENAI_ENDPOINT,
-    api_key=AZURE_OPENAI_API_KEY
+	openai_api_version=os.environ.get("AZURE_OPENAI_VERSION", "2023-07-01-preview"),
+	azure_deployment=deployment_name,
+	azure_endpoint=AZURE_OPENAI_ENDPOINT,
+	api_key=AZURE_OPENAI_API_KEY
 )
 ```
 
@@ -184,7 +184,7 @@ DuckDuckGo was chosen for this example because it:
 
 - **Requires NO API KEY**
 - Easy to use
-- Provides `snippets` 
+- Provides `snippets`
 
 ![DuckDuckGo Search Tool](https://raw.githubusercontent.com/ranfysvalle02/blog-drafts/main/x219.png)
 
@@ -205,7 +205,7 @@ CrewAI orchestrates the execution of tasks by agents. In CrewAI, a Crew represen
 
 **Fine-Tuning Your Investment Researcher**
 
-CrewAI allows you to customize your agent's behavior through various parameters: 
+CrewAI allows you to customize your agent's behavior through various parameters:
 
 * **Role & Goal (AGENT_ROLE & AGENT_GOAL):** These define the agent's purpose.  Here, we set the role to "Investment Researcher" with a goal of "identifying investment opportunities." This guides the agent towards relevant data sources and analysis methods (e.g., market trends, company news, analyst reports).
 * **Backstory:** Craft a backstory like "Expert stock researcher with decades of experience" to add context and potentially influence the agent's communication style and interpretation of information.
@@ -282,40 +282,40 @@ Next, we define our MongoDB aggregation pipeline. This pipeline is used to proce
 # MongoDB Aggregation Pipeline
 pipeline = [
   {
-	"$unwind": "$transactions"  # Deconstruct the transactions array into separate documents
+    "$unwind": "$transactions"  # Deconstruct the transactions array into separate documents
   },
   {
-	"$group": {        			  # Group documents by stock symbol
-  	"_id": "$transactions.symbol",  # Use symbol as the grouping key
-  	"buyValue": {      			  # Calculate total buy value
-  	  "$sum": {
-		  "$cond": [     			  # Conditional sum based on transaction type
-  		  { "$eq": ["$transactions.transaction_code", "buy"] },  # Check for "buy" transactions
-  		  { "$toDouble": "$transactions.total" }, 			  # Convert total to double for sum
-  		  0                                    			  # Default value for non-buy transactions
-		  ]
-  	  }
-  	},
-  	"sellValue": {     			  # Calculate total sell value (similar to buyValue)
-  	  "$sum": {
-		  "$cond": [
-  		  { "$eq": ["$transactions.transaction_code", "sell"] },
-  		  { "$toDouble": "$transactions.total" },
-  		  0
-		  ]
-  	  }
-  	}
-	}
+    "$group": {   				   # Group documents by stock symbol
+      "_id": "$transactions.symbol",  # Use symbol as the grouping key
+      "buyValue": { 				   # Calculate total buy value
+        "$sum": {
+   	   "$cond": [				   # Conditional sum based on transaction type
+     	   { "$eq": ["$transactions.transaction_code", "buy"] },  # Check for "buy" transactions
+     	   { "$toDouble": "$transactions.total" },    		   # Convert total to double for sum
+     	   0                               				   # Default value for non-buy transactions
+   	   ]
+        }
+      },
+      "sellValue": {				   # Calculate total sell value (similar to buyValue)
+        "$sum": {
+   	   "$cond": [
+     	   { "$eq": ["$transactions.transaction_code", "sell"] },
+     	   { "$toDouble": "$transactions.total" },
+     	   0
+   	   ]
+        }
+      }
+    }
   },
   {
-	"$project": {       			  # Project desired fields (renaming and calculating net gain)
-  	"_id": 0,          			  # Exclude original _id field
-  	"symbol": "$_id",   			  # Rename _id to symbol for clarity
-  	"netGain": { "$subtract": ["$sellValue", "$buyValue"] }  # Calculate net gain
-	}
+    "$project": {  				   # Project desired fields (renaming and calculating net gain)
+      "_id": 0,     				   # Exclude original _id field
+      "symbol": "$_id",  			   # Rename _id to symbol for clarity
+      "netGain": { "$subtract": ["$sellValue", "$buyValue"] }  # Calculate net gain
+    }
   },
   {
-	"$sort": { "netGain": -1 }  # Sort results by net gain (descending)
+    "$sort": { "netGain": -1 }  # Sort results by net gain (descending)
   },
   {"$limit": 3}  # Limit results to top 3 stocks
 ]
@@ -347,9 +347,22 @@ Here's a breakdown of what the MongoDB pipeline does:
 
 ![MongoDB Aggregation Pipeline Results Screenshot](https://raw.githubusercontent.com/ranfysvalle02/blog-drafts/main/x221.png)
 
-### Task Execution
+### Preliminary Check: Ensuring Error-Free Execution
 
-Finally, we kick off our task execution. The researcher agent will use the data from our MongoDB aggregation, as well as any other tools at their disposal, to analyze the data and provide insights.
+Before we initiate our automated agent workflow, it's crucial to ensure that the code executed so far is error-free. Run the code up to this point and verify that there are no errors before proceeding to the next step.
+
+The expected output should resemble the following:
+
+```
+MongoDB Aggregation Pipeline Results:
+[{'netGain': 72769230.71428967, 'symbol': 'amzn'},
+ {'netGain': 39912931.04990542, 'symbol': 'sap'},
+ {'netGain': 25738882.292086124, 'symbol': 'aapl'}]
+```
+
+### Initiating the Agent Task Execution
+
+With the preliminary checks complete, we can now kick off our task execution. The researcher agent will utilize the data derived from our MongoDB aggregation, along with any other tools at its disposal, to analyze the data and generate insightful conclusions.
 
 #### **file: investment_analysis.py**
 ```python
@@ -375,10 +388,10 @@ AZURE_OPENAI_ENDPOINT = "https://__DEMO__.openai.azure.com"
 AZURE_OPENAI_API_KEY = "__AZURE_OPENAI_API_KEY__"
 deployment_name = "gpt-4-32k"  # The name of your model deployment
 default_llm = AzureChatOpenAI(
-    openai_api_version=os.environ.get("AZURE_OPENAI_VERSION", "2023-07-01-preview"),
-    azure_deployment=deployment_name,
-    azure_endpoint=AZURE_OPENAI_ENDPOINT,
-    api_key=AZURE_OPENAI_API_KEY
+	openai_api_version=os.environ.get("AZURE_OPENAI_VERSION", "2023-07-01-preview"),
+	azure_deployment=deployment_name,
+	azure_endpoint=AZURE_OPENAI_ENDPOINT,
+	api_key=AZURE_OPENAI_API_KEY
 )
 
 # Web Search Setup
@@ -456,40 +469,40 @@ tech_crew = Crew(
 # MongoDB Aggregation Pipeline
 pipeline = [
   {
-	"$unwind": "$transactions"  # Deconstruct the transactions array into separate documents
+    "$unwind": "$transactions"  # Deconstruct the transactions array into separate documents
   },
   {
-	"$group": {        			  # Group documents by stock symbol
-  	"_id": "$transactions.symbol",  # Use symbol as the grouping key
-  	"buyValue": {      			  # Calculate total buy value
-  	  "$sum": {
-		  "$cond": [     			  # Conditional sum based on transaction type
-  		  { "$eq": ["$transactions.transaction_code", "buy"] },  # Check for "buy" transactions
-  		  { "$toDouble": "$transactions.total" }, 			  # Convert total to double for sum
-  		  0                                    			  # Default value for non-buy transactions
-		  ]
-  	  }
-  	},
-  	"sellValue": {     			  # Calculate total sell value (similar to buyValue)
-  	  "$sum": {
-		  "$cond": [
-  		  { "$eq": ["$transactions.transaction_code", "sell"] },
-  		  { "$toDouble": "$transactions.total" },
-  		  0
-		  ]
-  	  }
-  	}
-	}
+    "$group": {   				   # Group documents by stock symbol
+      "_id": "$transactions.symbol",  # Use symbol as the grouping key
+      "buyValue": { 				   # Calculate total buy value
+        "$sum": {
+   	   "$cond": [				   # Conditional sum based on transaction type
+     	   { "$eq": ["$transactions.transaction_code", "buy"] },  # Check for "buy" transactions
+     	   { "$toDouble": "$transactions.total" },    		   # Convert total to double for sum
+     	   0                               				   # Default value for non-buy transactions
+   	   ]
+        }
+      },
+      "sellValue": {				   # Calculate total sell value (similar to buyValue)
+        "$sum": {
+   	   "$cond": [
+     	   { "$eq": ["$transactions.transaction_code", "sell"] },
+     	   { "$toDouble": "$transactions.total" },
+     	   0
+   	   ]
+        }
+      }
+    }
   },
   {
-	"$project": {       			  # Project desired fields (renaming and calculating net gain)
-  	"_id": 0,          			  # Exclude original _id field
-  	"symbol": "$_id",   			  # Rename _id to symbol for clarity
-  	"netGain": { "$subtract": ["$sellValue", "$buyValue"] }  # Calculate net gain
-	}
+    "$project": {  				   # Project desired fields (renaming and calculating net gain)
+      "_id": 0,     				   # Exclude original _id field
+      "symbol": "$_id",  			   # Rename _id to symbol for clarity
+      "netGain": { "$subtract": ["$sellValue", "$buyValue"] }  # Calculate net gain
+    }
   },
   {
-	"$sort": { "netGain": -1 }  # Sort results by net gain (descending)
+    "$sort": { "netGain": -1 }  # Sort results by net gain (descending)
   },
   {"$limit": 3}  # Limit results to top 3 stocks
 ]
@@ -582,4 +595,3 @@ The future of investment analysis belongs to those who embrace the power of data
 Don't just analyze the market – shape it. Start harnessing the potential of MongoDB and AI today, and transform your investment decision-making process.
 
 The source code is available at [GitHub - mdb-agg-crewai](https://github.com/ranfysvalle02/mdb-agg-crewai/blob/main/investment_analysis.py)
-
