@@ -345,8 +345,6 @@ Here's a breakdown of what the MongoDB pipeline does:
 
 6. **Limiting Results:** Lastly, the `$limit` operator is used to limit the number of documents passed to the next stage in the pipeline. In this case, it's set to 3, meaning only the top three documents (stocks with the highest net gain) will be included in the final output.
 
-![MongoDB Aggregation Pipeline Results Screenshot](https://raw.githubusercontent.com/ranfysvalle02/blog-drafts/main/x221.png)
-
 ### Preliminary Check: Ensuring Error-Free Execution
 
 Before we initiate our automated agent workflow, it's crucial to ensure that the code executed so far is error-free. Run the code up to this point and verify that there are no errors before proceeding to the next step.
@@ -368,6 +366,8 @@ With the preliminary checks complete, we can now kick off our task execution. Th
 ```python
 tech_crew.kickoff(inputs={'agg_data': str(results)})
 ```
+
+![MongoDB Aggregation Pipeline Results Screenshot](https://raw.githubusercontent.com/ranfysvalle02/blog-drafts/main/x221.png)
 
 ### Complete Source Code
 #### **file: investment_analysis.py**
