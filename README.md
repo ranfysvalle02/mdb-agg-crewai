@@ -12,14 +12,6 @@ For this example, we will create an Investment Researcher Agent. This agent is o
 
 **Unlocking the Power of AI Collaboration: Agents, Tasks, and Tools**
 
-The realm of artificial intelligence (AI) is rapidly evolving, transforming how we approach tasks and projects in the data-driven world we live in. CrewAI takes this a step further by introducing a groundbreaking framework for collaborative AI. This framework empowers teams to achieve more than ever before by leveraging the combined strengths of specialized AI units and streamlined workflows.
-
-At the core of CrewAI lie **agents**. These are not your typical AI assistants; instead, they function as intelligent team members, each with a distinct **role** (e.g., researcher, writer, editor) and a well-defined **goal**. They possess the capability to perform tasks, make decisions, and even communicate with other agents to achieve the overarching objectives of a crew.
-
-But what truly sets CrewAI apart is its ability to orchestrate seamless collaboration between these agents. This is achieved through a system of **tasks**. Tasks act as the building blocks of CrewAI workflows, allowing you to define a sequence of actions that leverage the strengths of different agents.
-
-CrewAI also provides a comprehensive arsenal of **tools** that further empower these agents. These tools encompass a wide range of capabilities, including web scraping, data analysis, and content generation. By equipping agents with the right tools, you can ensure they have everything they need to perform their tasks effectively.
-
 In essence, CrewAI's powerful combination of agents, tasks, and tools empowers you to:
 
 * **Automate repetitive tasks:** Free up your team's valuable time and resources by automating mundane or repetitive tasks.
